@@ -22,7 +22,7 @@ eachLine('./PI.txt', (line, last) => {
         let num = ""
 
         let j = 0
-        while (numPI[i+j] === numPI[8+i-j] && j < 4){. //verifica se os 4 primeiros dígitos são iguais aos 4 últimos. 
+        while (numPI[i+j] === numPI[8+i-j] && j < 4){ //verifica se os 4 primeiros dígitos são iguais aos 4 últimos. 
             num += numPI[i+j]
             j++
         }
