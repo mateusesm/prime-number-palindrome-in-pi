@@ -16,35 +16,27 @@ eachLine('./PI.txt', (line, last) => {
 
     for (let i = 0; i < numPI.length-9; i++) {
 
-        if (numPI[i] !== numPI[i+8])
+        if (numPI[i] !== numPI[i+8] || numPI[i+8] % 2 == 0) //se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue.
         continue
             
         let num = ""
 
         let j = 0
-        while (numPI[i+j] === numPI[8+i-j] && j < 9){
+        while (numPI[i+j] === numPI[8+i-j] && j < 4){. //verifica se os 4 primeiros dígitos são iguais aos 4 últimos. 
             num += numPI[i+j]
             j++
         }
-            
-        if (j === 9 && numPI[i+j-1] % 2 !== 0){
-            //verifica primo
-            //se primo, imprime e break
-            if (ePrimo(num)){
-                console.log(num)
-
-                const fim = Date.now()
-                console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
-                break
-                
-            }
+        
+        if (j === 4 && ePrimo(num)){
+            console.log(num)
+            const fim = Date.now()
+            console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
+            break
         }
     }
-
     if (last) {
         return false; // stop reading
     }
-
 });
 
 
