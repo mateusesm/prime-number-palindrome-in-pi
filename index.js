@@ -31,6 +31,8 @@ eachLine('./PI.txt', (line, last) => {
             console.log(num)
             const fim = Date.now()
             console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
+            const used = process.memoryUsage().heapUsed / 1024 / 1024;
+            console.log(`O script usou aproximadamente ${Math.round(used * 100) / 100} MB`);
             break
         }
     }
