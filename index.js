@@ -1,23 +1,21 @@
-const inicio = Date.now()
+const inicio = Date.now() // Pega o tempo em milisegundos antes do algoritmo executar
 
-const PI = require('./PI.js')
+const PI = require('./PI.js') // Chama um arquivo JS exportando a string do número PI com 1 milhão de casas decimais
+const numPI = PI.variable // Coloca a string do número PI contendo 1 milhão de casas decimais na variável numPI
 
-const numPI = PI.variable
-
-function vPrimo(num) {
+function vPrimo(num) { // Função que verifica se o número é primo
     for(let i = 2, s = Math.sqrt(num); i <= s; i++)
         if(num % i === 0) return false
     return true
 }
 
 for (let i = 2; i < numPI.length-9; i++) {
-
-    if (numPI[i] !== numPI[i+8] || numPI[i+8] % 2 == 0) //se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue.
+    if (numPI[i] !== numPI[i+8] || numPI[i+8] % 2 == 0) // Se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue
     continue
             
     let num = "", j = 0, numr = ""
 
-    while (numPI[i+j] === numPI[8+i-j] && j < 4){ //verifica se os 4 primeiros dígitos são iguais aos 4 últimos. 
+    while (numPI[i+j] === numPI[8+i-j] && j < 4){ // Verifica se os 4 primeiros dígitos são iguais aos 4 últimos
         num += numPI[i+j]
         numr = numPI[i+j] + numr
         j++
@@ -29,9 +27,9 @@ for (let i = 2; i < numPI.length-9; i++) {
     }
 }
   
-const fim = Date.now()
+const fim = Date.now() // Pega o tempo em milisegundos depois do algoritmo executar para mostrar o tempo decorrido
 console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
 
-const used = process.memoryUsage().heapUsed / 1024 / 1024
+const used = process.memoryUsage().heapUsed / 1024 / 1024 // Pega o processamento para mostrar a memória usada na execução do algoritmo
 console.log(`O script usou aproximadamente ${Math.round(used * 100) / 100} MB`)
 
