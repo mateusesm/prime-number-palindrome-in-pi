@@ -1,35 +1,54 @@
-const inicio = Date.now() // Pega o tempo em milisegundos antes do algoritmo executar
+const inicio = Date.now()
 
-const PI = require('./PI.js') // Chama um arquivo JS exportando a string do número PI com 1 milhão de casas decimais
-const numPI = PI.variable // Coloca a string do número PI contendo 1 milhão de casas decimais na variável numPI
+//const PI = require('./PI.js')
 
-function vPrimo(num) { // Função que verifica se o número é primo
-    for(let i = 2, s = Math.sqrt(num); i <= s; i++)
-        if(num % i === 0) return false
-    return true
+//const numPI = PI.variable
+
+import fetch from "node-fetch";
+
+function getPI(num) {
+    return fetch(`https://api.pi.delivery/v1/pi?start=0&numberOfDigits=${num}&radix=10`)
 }
 
-for (let i = 2; i < numPI.length-9; i++) {
-    if (numPI[i] !== numPI[i+8] || numPI[i+8] % 2 == 0) // Se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue
-    continue
+async function palindromePI() {
+    const response = await getPI(100000)
+    const responseJson = await response.json()
+
+    const numPI = responseJson.content
+
+    console.log(numPI)
+
+    function vPrimo(num) {
+        for(let i = 2, s = Math.sqrt(num); i <= s; i++)
+            if(num % i === 0) return false
+        return true
+    }
+    
+    for (let i = 2; i < numPI.length-9; i++) {
+    
+        if (numPI[i] !== numPI[i+8] || numPI[i+8] % 2 == 0) //se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue.
+        continue
+                
+        let num = "", j = 0, numr = ""
+    
+        while (numPI[i+j] === numPI[8+i-j] && j < 4){ //verifica se os 4 primeiros dígitos são iguais aos 4 últimos. 
+            num += numPI[i+j]
+            numr = numPI[i+j] + numr
+            j++
+        }
             
-    let num = "", j = 0, numr = ""
-
-    while (numPI[i+j] === numPI[8+i-j] && j < 4){ // Verifica se os 4 primeiros dígitos são iguais aos 4 últimos
-        num += numPI[i+j]
-        numr = numPI[i+j] + numr
-        j++
+        if (j === 4 && vPrimo(num=num+numPI[i+j]+numr)){
+            console.log(num)
+            break
+        }
     }
-        
-    if (j === 4 && vPrimo(num=num+numPI[i+j]+numr)){
-        console.log(num)
-        break
-    }
+      
+    const fim = Date.now()
+    console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
+    
+    const used = process.memoryUsage().heapUsed / 1024 / 1024
+    console.log(`O script usou aproximadamente ${Math.round(used * 100) / 100} MB`)
 }
-  
-const fim = Date.now() // Pega o tempo em milisegundos depois do algoritmo executar para mostrar o tempo decorrido
-console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
 
-const used = process.memoryUsage().heapUsed / 1024 / 1024 // Pega o processamento para mostrar a memória usada na execução do algoritmo
-console.log(`O script usou aproximadamente ${Math.round(used * 100) / 100} MB`)
+palindromePI()
 
