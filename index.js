@@ -56,8 +56,8 @@ const calcPalindromeNumber = (numPI) => { // Função que recebe o intervalo de 
 }
 
 let start = 0 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
-let end = 10 // Variável de controle do loop que controla quantas vezes irá se repetir
-let jump = 100 // Variável de controle que informa quantos dígitos de PI virão na requisição
+let end = 1000 // Variável de controle do loop que controla quantas vezes irá se repetir
+let jump = 1000 // Variável de controle que informa quantos dígitos de PI virão na requisição
 
 const palindromePI = async () => { // Função assíncrona que executa a função que faz requisição para a API e recebe uma promise para tratá-la e obter o intervalo de casas decimais de PI desejadas
     for (let c = 0; c <= end; c++) { // Loop que fica fazendo requisições a API
@@ -80,3 +80,5 @@ const palindromePI = async () => { // Função assíncrona que executa a funçã
 }
 
 palindromePI()
+
+
