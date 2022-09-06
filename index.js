@@ -21,6 +21,8 @@ function calcPalindromeNumber(numPI) { // Função que recebe o intervalo de cas
         
         if (numPI[i] !== numPI[i+20] || numPI[i+20] % 2 == 0) // Se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue
         continue
+
+        if (numPI[i + 1] !== numPI[i + 19] && numPI[i + 2] !== numPI[i + 18]) continue
                 
         let num = "", j = 0, numr = ""
     
@@ -47,9 +49,10 @@ async function palindromePI() { // Função assíncrona que executa a função q
         const response = await getPI(start, 1000) // A variável response recebe uma promise que foi resolvida com o await e trazida pela função getPI mandando o número de início e a quantidade máxima de dígitos retornáveis
         const responseJson = await response.json() // A variável responseJson recebe o resultado dessa promise convertida para JSON
 
-        if (calcPalindromeNumber(responseJson.content)) { // Manda o intervalo de 1000 dígitos de PI para verificar
-            const numPalindromePI = calcPalindromeNumber(responseJson.content) // Se retornar um número, é recebido pela variável
-            console.log(numPalindromePI) // Em seguida, mostrado na tela e para a execução
+        const numPalindromePI = calcPalindromeNumber(responseJson.content) // Manda o intervalo de 1000 dígitos de PI para verificar e retorna ou undefined ou o número correto
+
+        if (numPalindromePI) { // Se retornar um número, entra no se, mostra o número e para a execução
+            console.log(numPalindromePI)
             break
         }
 
