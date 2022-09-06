@@ -1,9 +1,5 @@
 const inicio = Date.now() // Pega o tempo em milisegundos antes do algoritmo executar
 
-//import PI from "./PI.js" // Chama um arquivo JS exportando a string do número PI com 1 milhão de casas decimais
-
-//const numPI = PI // Coloca a string do número PI contendo 1 milhão de casas decimais na variável numPI
-
 import axios from "axios" // Importa o módulo axios para fazer fetch e consumir APIS
 
 const getPI = (start, jump) => { // Função que recebe o número em que queremos iniciar a busca pelas casas decimais do PI e retorna o fetch
@@ -49,8 +45,8 @@ const calcPalindromeNumber = (numPI) => { // Função que recebe o intervalo de 
     return
 }
 
-let start = 1000000 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
-let end = 1000 // Variável de controle do loop que controla quantas vezes irá se repetir
+let start = 3000000 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
+let end = 100000 // Variável de controle do loop que controla quantas vezes irá se repetir
 let jump = 1000 // Variável de controle que informa quantos dígitos de PI virão na requisição
 
 const palindromePI = async () => { // Função assíncrona que executa a função que faz requisição para a API e recebe uma promise para tratá-la e obter o intervalo de casas decimais de PI desejadas
@@ -66,8 +62,7 @@ const palindromePI = async () => { // Função assíncrona que executa a funçã
         }
 
         start = start + jump - 21 // A cada iteração a variável de start recebe ela mesma mais 1000 - 9 para chamar um novo intervalo de casas decimais e subtrair 21 para evitar que os 21 últimos formem pares palindromos com a próxima "remessa"
-    
-        //if (start >= 1000000) break // Para ter um pouco mais de controle sobre a execução, ao chegar em 10 milhões o programa para a execução
+
     }
 
     const fim = Date.now() // Pega o tempo em milisegundos depois do algoritmo executar para mostrar o tempo decorrido
