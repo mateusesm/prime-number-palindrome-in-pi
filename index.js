@@ -2,6 +2,16 @@ const inicio = Date.now() // Pega o tempo em milisegundos antes do algoritmo exe
 
 import axios from "axios" // Importa o módulo axios para fazer fetch e consumir APIS
 
+const timeEnd = () => {
+
+    const fim = Date.now() // Pega o tempo em milisegundos depois do algoritmo executar para mostrar o tempo decorrido
+    console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
+    
+    const used = process.memoryUsage().heapUsed / 1024 / 1024 // Pega o processamento para mostrar a memória usada na execução do algoritmo
+    console.log(`O script usou aproximadamente ${Math.round(used * 100) / 100} MB`)
+
+}
+
 const getPI = (start, jump) => { // Função que recebe o número em que queremos iniciar a busca pelas casas decimais do PI e retorna o fetch
     return axios.get(`https://api.pi.delivery/v1/pi?start=${start}&numberOfDigits=${jump}&radix=10`)
 }
@@ -45,9 +55,9 @@ const calcPalindromeNumber = (numPI) => { // Função que recebe o intervalo de 
     return
 }
 
-let start = 3000000 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
-let end = 100000 // Variável de controle do loop que controla quantas vezes irá se repetir
-let jump = 1000 // Variável de controle que informa quantos dígitos de PI virão na requisição
+let start = 0 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
+let end = 10 // Variável de controle do loop que controla quantas vezes irá se repetir
+let jump = 100 // Variável de controle que informa quantos dígitos de PI virão na requisição
 
 const palindromePI = async () => { // Função assíncrona que executa a função que faz requisição para a API e recebe uma promise para tratá-la e obter o intervalo de casas decimais de PI desejadas
     for (let c = 0; c <= end; c++) { // Loop que fica fazendo requisições a API
@@ -65,12 +75,8 @@ const palindromePI = async () => { // Função assíncrona que executa a funçã
 
     }
 
-    const fim = Date.now() // Pega o tempo em milisegundos depois do algoritmo executar para mostrar o tempo decorrido
-    console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
-    
-    const used = process.memoryUsage().heapUsed / 1024 / 1024 // Pega o processamento para mostrar a memória usada na execução do algoritmo
-    console.log(`O script usou aproximadamente ${Math.round(used * 100) / 100} MB`)
-  
+    timeEnd()
+
 }
 
 palindromePI()
