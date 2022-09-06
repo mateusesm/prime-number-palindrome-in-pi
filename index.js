@@ -2,7 +2,11 @@ const inicio = Date.now() // Pega o tempo em milisegundos antes do algoritmo exe
 
 import axios from "axios" // Importa o módulo axios para fazer fetch e consumir APIS
 
-const timeEnd = () => {
+//import PI from "./PI-billion.js"
+
+//const numPI = PI
+
+const timeEnd = () => { // Função que é chamada logo após o termino do algoritmo para mostrar o tempo decorrido
 
     const fim = Date.now() // Pega o tempo em milisegundos depois do algoritmo executar para mostrar o tempo decorrido
     console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
@@ -22,9 +26,13 @@ const vPrimo = (num) => { // Função que verifica se o número é primo
     return true
 }
 
-const isPalindrome = (numPI, i) => { // Função que verifica se o número é palindromo e primo e se for retorna o número, caso contrário, retorna undefined
-
-    let num = "", j = 0, numr = ""
+const calcPalindromeNumber = (numPI) => { // Função que recebe o intervalo de casa decimais do PI e verifica se o primeiro e o último dígitos são iguais e se o último dígito é par, se for, retorna o número, se não, retorna undefined
+    for (let i = 0; i < numPI.length-21; i++) {
+        
+        if (numPI[i] !== numPI[i+20] || numPI[i+20] % 2 == 0) // Se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue
+        continue
+        
+        let num = "", j = 0, numr = ""
     
         while (numPI[i+j] === numPI[20+i-j] && j < 10){ // Verifica se os 10 primeiros dígitos são iguais aos 10 últimos. 
             num += numPI[i+j]
@@ -35,32 +43,18 @@ const isPalindrome = (numPI, i) => { // Função que verifica se o número é pa
         if (j === 10 && vPrimo(num=num+numPI[i+j]+numr)){ // Caso o número seja palindromo e primo, retorna o número, caso contrário, retorna undefined
             return num
         }
-
-    return
-
-}
-
-const calcPalindromeNumber = (numPI) => { // Função que recebe o intervalo de casa decimais do PI e verifica se o primeiro e o último dígitos são iguais e se o último dígito é par, se for, retorna o número, se não, retorna undefined
-    for (let i = 0; i < numPI.length-21; i++) {
-        
-        if (numPI[i] !== numPI[i+20] || numPI[i+20] % 2 == 0) // Se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue
-        continue
-        
-        const num = isPalindrome(numPI, i)
-
-        if (num) return num
         
     }
 
     return
 }
 
-let start = 0 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
-let end = 1000 // Variável de controle do loop que controla quantas vezes irá se repetir
-let jump = 1000 // Variável de controle que informa quantos dígitos de PI virão na requisição
+let start = 30000000 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
+let end = 1000000000000000 // Variável de controle do loop que controla quantas vezes irá se repetir
+let jump = 500 // Variável de controle que informa quantos dígitos de PI virão na requisição
 
 const palindromePI = async () => { // Função assíncrona que executa a função que faz requisição para a API e recebe uma promise para tratá-la e obter o intervalo de casas decimais de PI desejadas
-    for (let c = 0; c <= end; c++) { // Loop que fica fazendo requisições a API
+    for (let c = 0; c < end; c++) { // Loop que fica fazendo requisições a API
 
         const response = await getPI(start, jump) // A variável response recebe uma promise que foi resolvida com o await e trazida pela função getPI mandando o número de início
 
