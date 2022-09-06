@@ -31,10 +31,11 @@ function calcPrimePalindrome(numPI) {
         }
             
         if (j === 4 && vPrimo(num=num+numPI[i+j]+numr)){
-            console.log(num)
-            break
+            return num
         }
     }
+
+    return
 }
 
 let start = 100000
@@ -46,7 +47,12 @@ async function palindromePI() {
         const response = await getPI(start, 1000)
         const responseJson = await response.json()
 
-        calcPrimePalindrome(responseJson.content)
+        const numPalindromePI = calcPrimePalindrome(responseJson.content)
+
+        if (numPalindromePI) {
+            console.log(numPalindromePI)
+            break
+        }
 
         start = start + 1000 - 9
     
