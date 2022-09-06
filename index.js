@@ -6,8 +6,8 @@ const inicio = Date.now() // Pega o tempo em milisegundos antes do algoritmo exe
 
 import fetch from "node-fetch"; // Importa o módulo node-fetch para fazer fetch e consumir APIS
 
-function getPI(start) { // Função que recebe o número em que queremos iniciar a busca pelas casas decimais do PI e retorna o fetch
-    return fetch(`https://api.pi.delivery/v1/pi?start=${start}&numberOfDigits=1000&radix=10`)
+function getPI(start, jump) { // Função que recebe o número em que queremos iniciar a busca pelas casas decimais do PI e retorna o fetch
+    return fetch(`https://api.pi.delivery/v1/pi?start=${start}&numberOfDigits=${jump}&radix=10`)
 }
 
 function vPrimo(num) { // Função que verifica se o número é primo
@@ -42,11 +42,12 @@ function calcPalindromeNumber(numPI) { // Função que recebe o intervalo de cas
 
 let start = 0 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
 let end = 10000 // Variável de controle do loop que controla quantas vezes irá se repetir
+let jump = 1000
 
 async function palindromePI() { // Função assíncrona que executa a função que faz requisição para a API e recebe uma promise para tratá-la e obter o intervalo de casas decimais de PI desejadas
     for (let c = 0; c <= end; c++) { // Loop que fica fazendo requisições a API
 
-        const response = await getPI(start) // A variável response recebe uma promise que foi resolvida com o await e trazida pela função getPI mandando o número de início
+        const response = await getPI(start, jump) // A variável response recebe uma promise que foi resolvida com o await e trazida pela função getPI mandando o número de início
         const responseJson = await response.json() // A variável responseJson recebe o resultado dessa promise convertida para JSON
 
         const numPalindromePI = calcPalindromeNumber(responseJson.content) // Manda o intervalo de 1000 dígitos de PI para verificar e retorna ou undefined ou o número correto
@@ -56,7 +57,7 @@ async function palindromePI() { // Função assíncrona que executa a função q
             break
         }
 
-        start = start + 1000 - 21 // A cada iteração a variável de start recebe ela mesma mais 1000 - 9 para chamar um novo intervalo de casas decimais e subtrair 21 para evitar que os 21 últimos formem pares palindromos com a próxima "remessa"
+        start = start + jump - 21 // A cada iteração a variável de start recebe ela mesma mais 1000 - 9 para chamar um novo intervalo de casas decimais e subtrair 21 para evitar que os 21 últimos formem pares palindromos com a próxima "remessa"
     
         if (start >= 10000000) break // Para ter um pouco mais de controle sobre a execução, ao chegar em 10 milhões o programa para a execução
     }
@@ -70,4 +71,3 @@ async function palindromePI() { // Função assíncrona que executa a função q
 }
 
 palindromePI()
-
