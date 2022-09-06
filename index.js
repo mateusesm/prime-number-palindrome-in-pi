@@ -37,17 +37,18 @@ function calcPrimePalindrome(numPI) {
     }
 }
 
-let start = 50000
+let start = 100000
 let end = 900000
 
 async function palindromePI() {
     for (let c = 0; c <= end; c++) {
+
         const response = await getPI(start, 1000)
         const responseJson = await response.json()
 
-        calcPrimePalindrome(numPI)
+        calcPrimePalindrome(responseJson.content)
 
-        start += 10000 - 9
+        start = start + 1000 - 9
     
         if (start >= 1000000) break
     }
