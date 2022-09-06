@@ -17,20 +17,20 @@ function vPrimo(num) {
 }
 
 function calcPrimePalindrome(numPI) {
-    for (let i = 0; i < numPI.length-9; i++) {
+    for (let i = 0; i < numPI.length-21; i++) {
         
-        if (numPI[i] !== numPI[i+8] || numPI[i+8] % 2 == 0) //se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue.
+        if (numPI[i] !== numPI[i+20] || numPI[i+20] % 2 == 0) //se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue.
         continue
                 
         let num = "", j = 0, numr = ""
     
-        while (numPI[i+j] === numPI[8+i-j] && j < 4){ //verifica se os 4 primeiros dígitos são iguais aos 4 últimos. 
+        while (numPI[i+j] === numPI[20+i-j] && j < 10){ //verifica se os 4 primeiros dígitos são iguais aos 4 últimos. 
             num += numPI[i+j]
             numr = numPI[i+j] + numr
             j++
         }
             
-        if (j === 4 && vPrimo(num=num+numPI[i+j]+numr)){
+        if (j === 10 && vPrimo(num=num+numPI[i+j]+numr)){
             return num
         }
     }
@@ -38,8 +38,8 @@ function calcPrimePalindrome(numPI) {
     return
 }
 
-let start = 100000
-let end = 900
+let start = 0
+let end = 100000
 
 async function palindromePI() {
     for (let c = 0; c <= end; c++) {
@@ -56,7 +56,7 @@ async function palindromePI() {
 
         start = start + 1000 - 9
     
-        if (start >= 1000000) break
+        if (start >= 100000000) break
     }
 
     const fim = Date.now()
