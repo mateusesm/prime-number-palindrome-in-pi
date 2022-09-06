@@ -6,26 +6,21 @@ const inicio = Date.now()
 
 import fetch from "node-fetch";
 
-function getPI(num) {
-    return fetch(`https://api.pi.delivery/v1/pi?start=0&numberOfDigits=${num}&radix=10`)
+function getPI(start) {
+    return fetch(`https://api.pi.delivery/v1/pi?start=${start}&numberOfDigits=1000&radix=10`)
 }
 
-async function palindromePI() {
-    const response = await getPI(100000)
-    const responseJson = await response.json()
+function vPrimo(num) {
+    for(let i = 2, s = Math.sqrt(num); i <= s; i++)
+        if(num % i === 0) return false
+    return true
+}
 
-    const numPI = responseJson.content
+const arrayTeste = []
 
-    console.log(numPI)
-
-    function vPrimo(num) {
-        for(let i = 2, s = Math.sqrt(num); i <= s; i++)
-            if(num % i === 0) return false
-        return true
-    }
-    
-    for (let i = 2; i < numPI.length-9; i++) {
-    
+function calcPrimePalindrome(numPI) {
+    for (let i = 0; i < numPI.length-9; i++) {
+        
         if (numPI[i] !== numPI[i+8] || numPI[i+8] % 2 == 0) //se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue.
         continue
                 
@@ -41,13 +36,33 @@ async function palindromePI() {
             console.log(num)
             break
         }
+
+        arrayTeste.push('oi')
     }
-      
+}
+
+let start = 50000
+let end = 900000
+
+async function palindromePI() {
+    for (let c = 0; c <= end; c++) {
+        const response = await getPI(start, 1000)
+        const responseJson = await response.json()
+
+        calcPrimePalindrome(responseJson.content)
+
+        start += 10000 - 9
+    
+        if (start >= 1000000) break
+    }
+
     const fim = Date.now()
     console.log(`Tempo de execução: ${fim - inicio} milisegundos`)
     
     const used = process.memoryUsage().heapUsed / 1024 / 1024
     console.log(`O script usou aproximadamente ${Math.round(used * 100) / 100} MB`)
+
+    console.log(arrayTeste.length)
 }
 
 palindromePI()
