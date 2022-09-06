@@ -38,7 +38,7 @@ function calcPrimePalindrome(numPI) {
 }
 
 let start = 100000
-let end = 900000
+let end = 900
 
 async function palindromePI() {
     for (let c = 0; c <= end; c++) {
