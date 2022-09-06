@@ -46,7 +46,7 @@ let end = 10000 // Variável de controle do loop que controla quantas vezes irá
 async function palindromePI() { // Função assíncrona que executa a função que faz requisição para a API e recebe uma promise para tratá-la e obter o intervalo de casas decimais de PI desejadas
     for (let c = 0; c <= end; c++) { // Loop que fica fazendo requisições a API
 
-        const response = await getPI(start, 1000) // A variável response recebe uma promise que foi resolvida com o await e trazida pela função getPI mandando o número de início e a quantidade máxima de dígitos retornáveis
+        const response = await getPI(start) // A variável response recebe uma promise que foi resolvida com o await e trazida pela função getPI mandando o número de início
         const responseJson = await response.json() // A variável responseJson recebe o resultado dessa promise convertida para JSON
 
         const numPalindromePI = calcPalindromeNumber(responseJson.content) // Manda o intervalo de 1000 dígitos de PI para verificar e retorna ou undefined ou o número correto
