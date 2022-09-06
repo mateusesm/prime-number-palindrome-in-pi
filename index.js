@@ -21,8 +21,6 @@ function calcPalindromeNumber(numPI) { // Função que recebe o intervalo de cas
         
         if (numPI[i] !== numPI[i+20] || numPI[i+20] % 2 == 0) // Se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue
         continue
-
-        if (numPI[i + 1] !== numPI[i + 19] && numPI[i + 2] !== numPI[i + 18]) continue
                 
         let num = "", j = 0, numr = ""
     
