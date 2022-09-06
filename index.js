@@ -1,8 +1,8 @@
 const inicio = Date.now()
 
-//const PI = require('./PI.js')
+//import PI from "./PI.js"
 
-//const numPI = PI.variable
+//const numPI = PI
 
 import fetch from "node-fetch";
 
@@ -15,8 +15,6 @@ function vPrimo(num) {
         if(num % i === 0) return false
     return true
 }
-
-const arrayTeste = []
 
 function calcPrimePalindrome(numPI) {
     for (let i = 0; i < numPI.length-9; i++) {
@@ -36,8 +34,6 @@ function calcPrimePalindrome(numPI) {
             console.log(num)
             break
         }
-
-        arrayTeste.push('oi')
     }
 }
 
@@ -49,7 +45,7 @@ async function palindromePI() {
         const response = await getPI(start, 1000)
         const responseJson = await response.json()
 
-        calcPrimePalindrome(responseJson.content)
+        calcPrimePalindrome(numPI)
 
         start += 10000 - 9
     
@@ -61,8 +57,7 @@ async function palindromePI() {
     
     const used = process.memoryUsage().heapUsed / 1024 / 1024
     console.log(`O script usou aproximadamente ${Math.round(used * 100) / 100} MB`)
-
-    console.log(arrayTeste.length)
+  
 }
 
 palindromePI()
