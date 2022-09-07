@@ -30,7 +30,12 @@ const vPrimo = (num) => { // Função que verifica se o número é primo
     return true
 }
 
-const calcPalindromeNumber = (numPI) => { // Função que recebe o intervalo de casa decimais do PI e verifica se o primeiro e o último dígitos são iguais e se o último dígito é par, se for, retorna o número, se não, retorna undefined
+const calcPalindromeNumber = (arrayJson) => { // Função que recebe o intervalo de casa decimais do PI e verifica se o primeiro e o último dígitos são iguais e se o último dígito é par, se for, retorna o número, se não, retorna undefined
+
+    let numPI = ""
+
+    numPI = [...arrayJson]
+
     for (let i = 0; i < numPI.length-21; i++) {
         
         if (numPI[i] !== numPI[i+20] || numPI[i+20] % 2 == 0) // Se o número primeiro dígito for diferente do último dígito ou se o último dígito for par, continue
@@ -53,27 +58,38 @@ const calcPalindromeNumber = (numPI) => { // Função que recebe o intervalo de 
     return
 }
 
-let start1 = 100000000 // Variável de controle que controla por qual casa decimal de PI iremos começar a busca
-let start2 = 100500000
-let start3 = 200000000
-let start4 = 200500000
-let start5 = 300000000
-let start6 = 300500000
-let start7 = 400000000
-let start8 = 400500000
-let start9 = 500500000
-let start10 = 600000000
+// Variáveis de controle que controlam por qual casa decimal de PI iremos começar a busca
+let start1 = 500000
+let start2 = 1000000
+/*let start3 = 840000
+let start4 = 1140000
+let start5 = 1440000
+let start6 = 1740000
+let start7 = 2100000
+let start8 = 2400000
+let start9 = 2700000
+let start10 = 3000000*/
+
 let end = 10000 // Variável de controle do loop que controla quantas vezes irá se repetir
 let jump = 1000 // Variável de controle que informa quantos dígitos de PI virão na requisição
 
 const palindromePI = async (start, end, jump) => { // Função assíncrona que executa a função que faz requisição para a API e recebe uma promise para tratá-la e obter o intervalo de casas decimais de PI desejadas
     for (let c = 0; c < end; c++) { // Loop que fica fazendo requisições a API
 
-        const response = await getPI(start, jump) // A variável response recebe uma promise que foi resolvida com o await e trazida pela função getPI mandando o número de início
+        const arrayJson = []
 
-        const responseJson = await response.json() // Converte a resposta para JSON
+        for (let i = 0; i < 100; i++) {
 
-        const numPalindromePI = calcPalindromeNumber(responseJson.content) // Manda o intervalo de 1000 dígitos de PI para verificar e retorna ou undefined ou o número correto
+            const response = await getPI(start, jump) // A variável response recebe uma promise que foi resolvida com o await e trazida pela função getPI mandando o número de início
+
+            const responseJson = await response.json() // Converte a resposta para JSON
+
+            arrayJson.push(responseJson.content)
+
+            start = start + jump - 21
+        }
+
+        const numPalindromePI = calcPalindromeNumber(arrayJson) // Manda o intervalo de 1000 dígitos de PI para verificar e retorna ou undefined ou o número correto
 
         if (numPalindromePI && !fs.existsSync('./palindromo.txt')) { // Se retornar um número e não tiver um arquivo txt criado, entra no se, cria o arquivo txt com o número e para a função
             console.clear()
@@ -84,7 +100,7 @@ const palindromePI = async (start, end, jump) => { // Função assíncrona que e
             console.log(`Não encontrei apartir de ${start}`)
         }
 
-        start = start + jump - 21 // A cada iteração a variável de start recebe ela mesma mais 1000 - 9 para chamar um novo intervalo de casas decimais e subtrair 21 para evitar que os 21 últimos formem pares palindromos com a próxima "remessa"
+         // A cada iteração a variável de start recebe ela mesma mais 1000 - 9 para chamar um novo intervalo de casas decimais e subtrair 21 para evitar que os 21 últimos formem pares palindromos com a próxima "remessa"
 
     }
 
@@ -104,7 +120,7 @@ const startTwo = (start2, end, jump) => {
 
 }
 
-const startThree = (start3, end, jump) => {
+/*const startThree = (start3, end, jump) => {
 
     palindromePI(start3, end, jump)
 
@@ -140,7 +156,6 @@ const startEight = (start8, end, jump) => {
 
 }
 
-
 const startNine = (start9, end, jump) => {
 
     palindromePI(start9, end, jump)
@@ -151,18 +166,18 @@ const startTen = (start10, end, jump) => {
 
     palindromePI(start10, end, jump)
 
-}
+}*/
 
 startOne(start1, end, jump)
 startTwo(start2, end, jump)
-startThree(start3, end, jump)
+/*startThree(start3, end, jump)
 startFour(start4, end, jump)
 startFive(start5, end, jump)
 startSix(start6, end, jump)
 startSeven(start7, end, jump)
 startEight(start8, end, jump)
 startNine(start9, end, jump)
-startTen(start10, end, jump)
+startTen(start10, end, jump)*/
 
 
 
