@@ -75,7 +75,7 @@ const palindromePI = async (start, end, jump) => { // Função assíncrona que e
 
         const numPalindromePI = calcPalindromeNumber(responseJson.content) // Manda o intervalo de 1000 dígitos de PI para verificar e retorna ou undefined ou o número correto
 
-        if (numPalindromePI && !fs.existsSync('./palindromo.txt')) { // Se retornar um número, entra no se, mostra o número e para a execução
+        if (numPalindromePI && !fs.existsSync('./palindromo.txt')) { // Se retornar um número e não tiver um arquivo txt criado, entra no se, cria o arquivo txt com o número e para a função
             console.clear()
             fs.writeFileSync('palindromo.txt', numPalindromePI)
             break
