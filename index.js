@@ -80,6 +80,7 @@ const palindromePI = async (start, end, jump) => { // Função assíncrona que e
             fs.writeFileSync('palindromo.txt', numPalindromePI)
             break
         } else {
+            console.clear()
             console.log(`Não encontrei apartir de ${start}`)
         }
 
