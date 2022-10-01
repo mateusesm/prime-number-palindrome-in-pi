@@ -2,6 +2,9 @@ import fetch from "node-fetch" // Importa o módulo fetch para fazer fetch e con
 
 import fs from 'fs'
 
+// 9 dígitos 318272813
+// 21 dígitos 151978145606541879151
+
 //import PI from "./PI-billion.js"
 
 const DNPI = 21 //Números de dígitos a se buscar
@@ -171,7 +174,7 @@ console.log("Executando... Aguarde!")
 const inicio = Date.now() // Pega o tempo em milisegundos antes do algoritmo executar
 
 let jump = 1000
-let start = 100000000
+let start = 100000000000
 let resp = []
 
 while (true){

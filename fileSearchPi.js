@@ -1,4 +1,5 @@
-const fs = require('fs');
+import fs from 'fs'
+
 const CHUNK_SIZE = 500000000; // 500 MB    //const CHUNK_SIZE = 1000000000; // 1 GB                  
 const DNPI = 21; //Números de dígitos do palíndromo.
 let resp = [] //Variável resposta que armazena todos os números encontrados em um array.

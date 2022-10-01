@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "palindrome": "node index.js"
+    "api-search": "node apiSearchPi.js",
+    "file-search": "node fileSearchPi.js"
   },
   "author": "",
   "license": "ISC",
