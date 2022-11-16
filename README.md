@@ -22,7 +22,7 @@ Depois de instalado o Node JS, será preciso baixar os módulos necessários, pa
 Você pode usar o gerenciador de pacotes de sua preferência (npm, yarn, etc.) para instalar todas as dependências, no meu caso, usei o npm:
 
 ```bash
-npm i
+npm install
 ```
 
 Em seguida, rode o seguinte comando para executar o algoritmo que busca pela API:
