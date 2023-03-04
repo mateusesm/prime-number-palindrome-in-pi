@@ -7,7 +7,7 @@ O algoritmo do arquivo fileSearchPi.js faz a busca em algum arquivo local que es
 
 Abaixo está um pequeno guia de instalação para rodar o projeto.
 
-### Instalação
+#### Instalação
 
 Após fazer o download deste projeto, certifique-se de que tem o Node JS instalado em sua máquina rodando o seguinte comando:
 
@@ -17,7 +17,7 @@ node --version
 
 O comando deverá retornar a versão do Node JS instalada. Caso não retorne, baixe-a.
 
-### Rodando o projeto
+#### Rodando o projeto
 
 Depois de instalado o Node JS, será preciso baixar os módulos necessários, para isso, dentro do terminal, na pasta do projeto, executeo comando:
 
