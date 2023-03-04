@@ -1,4 +1,4 @@
-### Desafio da SigmaGeek 2022 - Encontrando números primos grandes na expansão decimal de PI.
+### Desafio da SigmaGeek 2022 - Encontrando números primos palíndromos na expansão decimal de PI.
 
 #### Algoritmos que leem expansão decimal do número PI (3,1415...) por meio de uma API ou arquivos e trazem o primeiro número palíndromo primo com número de dígitos especificado pelo usuário
 
