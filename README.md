@@ -1,4 +1,6 @@
-### Algoritmos que leem expansão decimal do número PI (3,1415...) por meio de uma API ou arquivos e trazem o primeiro número palíndromo primo com número de dígitos especificado pelo usuário
+### Desafio da SigmaGeek 2022 - Encontrando números primos grandes na expansão decimal de PI.
+
+#### Algoritmos que leem expansão decimal do número PI (3,1415...) por meio de uma API ou arquivos e trazem o primeiro número palíndromo primo com número de dígitos especificado pelo usuário
 
 O algoritmo do arquivo apiSearchPi.js faz a busca por meio da API (https://pi.delivery/#apifetch).
 O algoritmo do arquivo fileSearchPi.js faz a busca em algum arquivo local que esteja disponível na máquina, sendo necessário talvez fazer algumas mudanças em nomes de diretórios.
